@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/red"
+    tools:context=".ProfileFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+   <!-- <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:src="@drawable/profile_image"/>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/red"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1.7">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/border_edit"
+            android:src="@drawable/previous"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:fontFamily="@font/lato_regular"
+        android:layout_marginLeft="20dp"
+        android:text="Profile"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardback"
+        android:backgroundTint="@color/cardback"
+        card_view:contentPadding="5dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_marginTop="100dp"
+        style="@style/CustomCardViewStyle">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" User Name"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/nameprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:drawablePadding="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_person_outline"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:inputType="textNoSuggestions"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="10"
+                    android:background="@drawable/border_edit"
+                    android:hint="Enter Your Name"/>
+
+
+             <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Password"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/ic_baseline_visibility"
+                    android:drawablePadding="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="10"
+                    android:background="@drawable/border_edit"
+                    android:hint="Enter your password"/>
+
+
+                <TextView
+
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Company Name"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                   />
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/companyprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:drawableLeft="@drawable/ic_baseline_apartment"
+                    android:drawablePadding="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:inputType="textPersonName"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:maxLength="10"
+                    android:background="@drawable/border_edit"
+                    android:hint="Company Name"/>
+
+                <TextView
+
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Address"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                   />
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/addressprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+                    android:paddingLeft="20dp"
+                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/ic_baseline_add_location_24"
+                    android:drawablePadding="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/border_edit"
+                    android:hint="Enter Your Address"
+                    android:inputType="textPersonName"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gmail"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                   />
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/emailprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:maxLines="1"
+                    android:drawableLeft="@drawable/ic_baseline_mail_outline"
+                    android:drawablePadding="20dp"
+                    android:textStyle="bold"
+                    android:lines="1"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:inputType="textPersonName"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="10"
+                    android:background="@drawable/border_edit"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Enter Your Mail Id"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Mobile Number "
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                   />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mobileprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/ic_baseline_mobile_screen_share"
+                    android:drawablePadding="20dp"
+                    android:textSize="15dp"
+                    android:lines="1"
+                    android:inputType="textPersonName"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:maxLength="10"
+                    android:background="@drawable/border_edit"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Enter Your Number"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Project"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="15dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_edit"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:spinnerMode="dropdown"
+                        android:textStyle="bold"
+                        android:layout_marginRight="0dp"
+                        android:entries="@array/Product_Weight"
+                        />
+                </LinearLayout>
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/border_edit"
+                    android:text="Logout"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="70dp"
+                    android:textAllCaps="false"
+                    android:textColor="@drawable/buttoncolorrad"
+                    android:textColorHighlight="@color/black"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

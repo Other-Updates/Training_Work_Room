@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/newtry"
+    android:orientation="vertical"
+    tools:context=".Register_screen">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_gravity="center"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTintMode="screen"
+        android:background="@drawable/registeredit"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/registernew"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create a New Account"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/lato_regular"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_marginTop="0dp"/>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cardback"
+        android:backgroundTint="@color/cardback"
+        app:cardElevation="300dp"
+        android:layout_marginTop="20dp"
+        style="@style/CustomCardViewStyle">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+           //Name
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" User Name"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+                />
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Enter Name"
+                android:textSize="15dp"
+                android:paddingLeft="20dp"
+                android:textStyle="bold"
+                android:drawablePadding="20dp"
+                android:drawableLeft="@drawable/ic_baseline_person_outline"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:inputType="textNoSuggestions"
+                android:layout_marginRight="30dp"
+                android:maxLength="25"
+                android:background="@drawable/border_edit"
+                />
+
+            //pass
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Password"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+                />
+            <EditText
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="20dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/ic_baseline_visibility"
+                android:drawablePadding="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:inputType="textPassword"
+                android:layout_marginRight="30dp"
+                android:maxLength="25"
+                android:background="@drawable/border_edit"
+                android:hint="Enter password"/>
+
+            //com name
+            <TextView
+
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Company Name"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+               />
+            <EditText
+
+                android:id="@+id/dob"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="20dp"
+                android:maxLines="1"
+                android:lines="1"
+                android:drawableLeft="@drawable/ic_baseline_apartment"
+                android:drawablePadding="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:inputType="textPersonName"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:maxLength="40"
+                android:background="@drawable/border_edit"
+                android:hint="Company Name"/>
+
+//address
+            <TextView
+
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Address"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+                />
+            <EditText
+
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:paddingLeft="20dp"
+                android:textStyle="bold"
+                android:lines="5"
+                android:drawableLeft="@drawable/ic_baseline_add_location_24"
+                android:drawablePadding="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/border_edit"
+                android:hint="Enter Address"
+
+                />
+            //Mail details
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Gmail "
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+                />
+            <EditText
+                android:id="@+id/gmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="20dp"
+                android:maxLines="1"
+                android:drawableLeft="@drawable/ic_baseline_mail_outline"
+                android:drawablePadding="20dp"
+                android:textStyle="bold"
+                android:lines="1"
+                android:inputType="textEmailAddress"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/border_edit"
+                android:layout_alignParentEnd="true"
+                android:hint="Enter Mail Id"/>
+
+
+            //mobilenumber details
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Mobile Number "
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+               />
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="20dp"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_baseline_mobile_screen_share"
+                android:drawablePadding="20dp"
+                android:textSize="15dp"
+                android:lines="1"
+                android:inputType="number"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:maxLength="10"
+                android:background="@drawable/border_edit"
+                android:layout_alignParentEnd="true"
+                android:hint="Enter Number"/>
+
+            //Spinner
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Project"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="15dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_edit"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal"
+            >
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:spinnerMode="dropdown"
+                android:textStyle="bold"
+                android:layout_marginRight="0dp"
+                android:entries="@array/Product_Weight"
+
+                />
+
+        </LinearLayout>
+
+            <Button
+                android:id="@+id/btInsert"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dob"
+                android:backgroundTint="@color/red"
+                android:background="@drawable/border_edit"
+                android:layout_marginLeft="30dp"
+                android:textColor="@drawable/buttoncolorrad"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false"
+                android:layout_marginBottom="5dp"
+                android:text="Submit"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+           <Button
+                android:id="@+id/btView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btDelete"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/red"
+                android:background="@drawable/border_edit"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dp"
+                android:text="VIEW"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="80dp"
+                    android:fontFamily="@font/alegreyasane_regular"
+                    android:text="Already have an account?"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textColor="@color/red"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="15dp"
+                    android:clickable="true"
+                    android:id="@+id/regbutton2"
+                    android:fontFamily="@font/alegreyasane_regular"/>
+            </LinearLayout>
+<!--
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </FrameLayout>-->
+        </LinearLayout>
+    </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+
+
+
+

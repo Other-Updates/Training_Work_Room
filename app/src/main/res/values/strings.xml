@@ -1,0 +1,47 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name" translatable="false">Face to face</string>
+
+    <string-array name="Product_Weight">
+        <item>Select</item>
+        <item>Cool In Cool</item>
+        <item>F2F ticketing</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+   <!-- <string-array name="gokulnath">
+        <Item> Select</Item>
+        <Item> Open</Item>
+        <Item> Inprogress</Item>
+        <Item> Completed</Item>
+        <Item> Hold</Item>
+    </string-array>
+-->
+
+    <string-array name="Select_City">
+
+        <item>Namakkal</item>
+        <item>Coimbatore</item>
+        <item>Chennai</item>
+        <item>Madurai</item>
+        <item>Salem</item>
+        <item>Thanjavur</item>
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+</resources>
