@@ -35,6 +35,9 @@ public class Login_page extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                
                 Intent intent= new Intent(Login_page.this,Register_screen.class);
                 Toast.makeText(getApplicationContext(),"Please Update Your Details",Toast.LENGTH_SHORT).show();
                 startActivity(intent);

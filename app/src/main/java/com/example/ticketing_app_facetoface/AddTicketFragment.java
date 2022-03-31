@@ -185,7 +185,16 @@ public class AddTicketFragment extends Fragment {
 
             }
         });
-    return view;
+
+
+      /*  intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
+*/
+
+
+
+        return view;
     }
     public void  UIScreen(View view )
     {
