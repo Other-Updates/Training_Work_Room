@@ -8,13 +8,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.style.ClickableSpan;
+import android.transition.Explode;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +30,7 @@ public class Register_screen extends AppCompatActivity {
     //Spinner spinner;
     Button insert, view;
     DBHelper DB;
+    ImageView regtolog;
     TextView login;
     boolean isAllFieldsChecked = false;
 
@@ -34,14 +40,12 @@ public class Register_screen extends AppCompatActivity {
         setContentView(R.layout.activity_register_screen);
 
 
-
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
       /* FragmentManager fragmentManager = getSupportFragmentManager();              //// first model ///pass new method111111111111
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final ProfileFragment myFragment = new ProfileFragment();*/
-
+        regtolog = findViewById(R.id.regtolog);
         name = findViewById(R.id.name);
         contact = findViewById(R.id.contact);
         dob = findViewById(R.id.dob);
@@ -52,6 +56,17 @@ public class Register_screen extends AppCompatActivity {
         view = findViewById(R.id.btView);
         login = findViewById(R.id.regbutton2);
         DB = new DBHelper(this);
+
+        regtolog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Register_screen.this, Login_page.class);
+                startActivity(intent);
+
+            }
+
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,18 +88,18 @@ public class Register_screen extends AppCompatActivity {
                 String gmail1 = gmail.getText().toString();
                 String mobile1 = mobile.getText().toString();
 
-                if(user.equals("")||pass.equals(""))
+                if (user.equals("") || pass.equals(""))
                     Toast.makeText(Register_screen.this, "", Toast.LENGTH_SHORT).show();
                 else {
                     if (pass.equals("")) {
                         Boolean checkuser = DB.checkusername(user);
                         if (checkuser == false) {
-                            Boolean insert = DB.insertuserdata(user,pass,company,address1,gmail1,mobile1);
+                            Boolean insert = DB.insertuserdata(user, pass, company, address1, gmail1, mobile1);
                             if (insert == true) {
                                 Toast.makeText(Register_screen.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), Home_Screen.class);
                                 startActivity(intent);
-                            } else{
+                            } else {
                                 Toast.makeText(Register_screen.this, "Registration failed", Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -150,6 +165,7 @@ public class Register_screen extends AppCompatActivity {
             }
         });
     }
+
 
     boolean isname(EditText text) {
         CharSequence email = text.getText().toString();

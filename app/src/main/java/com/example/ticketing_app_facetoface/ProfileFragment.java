@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class ProfileFragment extends Fragment {
 
     EditText nameprofile,password,companyprofile,addressprofile,emailprofile,mobileprofile;
     AlertDialog.Builder builder;
+    ImageView protoaddtick;
     Button logout;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -58,6 +60,26 @@ public class ProfileFragment extends Fragment {
            /* String strtext = getArguments().getString("name");*////stack overflow method
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        protoaddtick = view.findViewById(R.id.protoaddtick);
+        EditText e1 = (EditText) view.findViewById(R.id.nameprofile);
+        EditText e2 = (EditText) view.findViewById(R.id.password);
+        EditText e3 = (EditText) view.findViewById(R.id.companyprofile);
+        EditText e4 = (EditText) view.findViewById(R.id.addressprofile);
+        EditText e5 = (EditText) view.findViewById(R.id.emailprofile);
+        EditText e6 = (EditText) view.findViewById(R.id.mobileprofile);
+        e1.setText("Bindo");
+        e2.setText("123456789");
+        e3.setText("Bui");
+        e4.setText("Cbe");
+        e5.setText("bindobui2k22@gmail.com");
+        e6.setText("9487049816");
+        protoaddtick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),AddTicketFragment.class);
+                startActivity(intent);
+            }
+        });
 
     /*  Bundle bundle = getArguments();
         String message = bundle.getString("message");

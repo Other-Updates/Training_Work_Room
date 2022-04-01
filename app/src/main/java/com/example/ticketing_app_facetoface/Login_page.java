@@ -29,17 +29,14 @@ public class Login_page extends AppCompatActivity {
         submit = findViewById(R.id.button);
         register = findViewById(R.id.register);
         editbui = (EditText) findViewById(R.id.editbui);
-        editbui1= (EditText) findViewById(R.id.editbui1);
+        editbui1 = (EditText) findViewById(R.id.editbui1);
         DB = new DBHelper(this);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                
-                Intent intent= new Intent(Login_page.this,Register_screen.class);
-                Toast.makeText(getApplicationContext(),"Please Update Your Details",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Login_page.this, Register_screen.class);
+                Toast.makeText(getApplicationContext(), "Please Update Your Details", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
 
@@ -48,23 +45,25 @@ public class Login_page extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = editbui.getText().toString();
-                String pass = editbui1.getText().toString();
-                if(user.equals("")||pass.equals(""))
+
+                String username = editbui.getText().toString();
+                String password = editbui1.getText().toString();
+                Log.d(TAG, "checkbindo: ");
+                if (username.equals("") || password.equals(""))
+
                     Toast.makeText(Login_page.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-               else {
-                    Boolean checkuserpass = DB.checkusernamepassword(user,pass);
+
+                else {Log.d(TAG, "checkbindo1: ");
+                    Boolean checkuserpass = DB.checkusernamepassword(username, password);
                     if (checkuserpass == true) {
+                        Log.d(TAG, "checkbindo1: ");
                         Toast.makeText(Login_page.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), Home_Screen.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(Login_page.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
-
                     }
-
-       }
-
+                }
             }
         });
     }

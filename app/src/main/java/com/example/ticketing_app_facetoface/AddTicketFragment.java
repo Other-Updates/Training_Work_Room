@@ -41,8 +41,9 @@ public class AddTicketFragment extends Fragment {
     TextView datepick_addticket;
     final Calendar myCalendar= Calendar.getInstance();
 
-    ImageView imageView1;
-    Button select, previous, next,save,cancel;
+    ImageView imageView1,back;
+    TextView next,previous;
+    Button select,save,cancel;
     ImageSwitcher imageView;
 
     int PICK_IMAGE_MULTIPLE = 1;
@@ -82,6 +83,17 @@ public class AddTicketFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_ticket, container, false);
+
+        //back button
+        back= view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),Home_Screen.class);
+                startActivity(intent);
+            }
+        });
+
 
         imageView = view.findViewById(R.id.image);
         imageView1 = view.findViewById(R.id.imageView1);
@@ -146,23 +158,25 @@ public class AddTicketFragment extends Fragment {
                 if (position < mArrayUri.size() - 1) {
                     // increase the position by 1
                     position++;
+
                     imageView.setImageURI(mArrayUri.get(position));
                 } else {
                     Toast.makeText(getContext(), "Last Image Already Shown", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-      /*previous.setOnClickListener(new View.OnClickListener() {
+        previous = view.findViewById(R.id.previous);
+        previous.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View v) {
                 if (position > 0) {
                     //decrease the position by 1
-                    position++;
+                    position--;
                    imageView.setImageURI(mArrayUri.get(position));
+                    Toast.makeText(getContext(), "First Image Already Shown", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
 
 
         imageView = view.findViewById(R.id.image);
@@ -187,10 +201,7 @@ public class AddTicketFragment extends Fragment {
         });
 
 
-      /*  intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
-*/
+
 
 
 
@@ -333,3 +344,7 @@ public class AddTicketFragment extends Fragment {
     }*/
 
       }
+ /*  intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
+*/

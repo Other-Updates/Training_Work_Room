@@ -12,18 +12,19 @@ import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper  {
+    public static final String DBNAME = "usersjaaaaa.db";
     public DBHelper (Context context) {
-        super(context ,"Usersjaaaa.db",null,8);
+        super(context ,"Usersjaaaaa.db",null,10);
     }
 // ,gmail TEXT ,mobile TEXT
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("Create Table Usersjaaaa(name TEXT ,contact TEXT ,dob TEXT,address TEXT,gmail TEXT,mobile TEXT)");
+        DB.execSQL("Create Table Usersjaaaaa(name TEXT ,contact TEXT primary key ,dob TEXT,address TEXT,gmail TEXT,mobile TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        DB.execSQL("drop Table if exists Usersjaaaa");
+        DB.execSQL("drop Table if exists Usersjaaaaa");
     }
 
     public Boolean insertuserdata (String name, String contact, String dob,String address,String gmail,String mobile) {
@@ -36,17 +37,16 @@ public class DBHelper extends SQLiteOpenHelper  {
         contentValues.put("gmail", gmail);
         contentValues.put("mobile", mobile);
 
-        long result = DB.insert("Usersjaaaa", null, contentValues);
+        long result = DB.insert("Usersjaaaaa", null, contentValues);
 
         if (result == -1)
             return false;
-         else {
+         else
             return true;
-        }
     }
     public Boolean checkusername(String username) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from Usersjaaaa where username = ?", new String[]{username});
+        Cursor cursor = MyDB.rawQuery("Select * from Usersjaaaaa where username = ?", new String[]{username});
         if (cursor.getCount() > 0)
             return true;
         else
@@ -55,7 +55,7 @@ public class DBHelper extends SQLiteOpenHelper  {
 
     public Boolean checkusernamepassword(String username, String password){
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from Usersjaaaa where username = ? and password = ?", new String[] {username,password});
+        Cursor cursor = MyDB.rawQuery("Select * from Usersjaaaaa where username = ? and password = ?", new String[] {username,password});
         if(cursor.getCount()>0)
             return true;
         else
@@ -65,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper  {
     public Cursor getdata () {
 
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from usersjaaaa" , null);
+        Cursor cursor = DB.rawQuery("Select * from usersjaaaaa" , null);
         return cursor;
     }
 

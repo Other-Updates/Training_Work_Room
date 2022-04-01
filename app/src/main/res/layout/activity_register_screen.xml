@@ -7,12 +7,22 @@
     android:background="@drawable/newtry"
     android:orientation="vertical"
     tools:context=".Register_screen">
+    <ImageView
+        android:id="@+id/regtolog"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/border_edit"
+        android:src="@drawable/previous"/>
+
 
     <ImageView
         android:layout_width="70dp"
         android:layout_gravity="center"
         android:layout_height="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:backgroundTintMode="screen"
         android:background="@drawable/registeredit"
         android:backgroundTint="@color/white"
