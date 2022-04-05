@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class Register_screen extends AppCompatActivity {
     Button insert, view;
     DBHelper DB;
     TextView login;
+    ImageView regtologin;
     boolean isAllFieldsChecked = false;
 
     @Override
@@ -50,8 +52,17 @@ public class Register_screen extends AppCompatActivity {
         mobile = findViewById(R.id.mobile);
         insert = findViewById(R.id.btInsert);
         view = findViewById(R.id.btView);
+        regtologin =findViewById(R.id.regtologin);
         login = findViewById(R.id.regbutton2);
         DB = new DBHelper(this);
+        regtologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register_screen.this,Login_page.class);
+                startActivity(intent);
+            }
+        });
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

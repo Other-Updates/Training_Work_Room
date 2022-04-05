@@ -25,12 +25,11 @@
 
     <string-array name="Select_City">
 
-        <item>Namakkal</item>
-        <item>Coimbatore</item>
-        <item>Chennai</item>
-        <item>Madurai</item>
-        <item>Salem</item>
-        <item>Thanjavur</item>
+        <item>Select</item>
+        <item>Open</item>
+        <item>Inprogress</item>
+        <item>Completed</item>
+        <item>Hold</item>
 
     </string-array>
 

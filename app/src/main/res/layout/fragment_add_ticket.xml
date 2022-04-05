@@ -23,6 +23,7 @@
         android:layout_weight="1.7">
 
         <ImageView
+            android:id="@+id/addticktohome"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
@@ -306,7 +307,6 @@
                     android:textAllCaps="false"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="20dp"
-                    android:text="     Next     "
                     />
                 </LinearLayout>
 

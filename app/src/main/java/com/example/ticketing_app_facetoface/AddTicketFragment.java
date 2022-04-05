@@ -39,6 +39,7 @@ import java.util.Locale;
 public class AddTicketFragment extends Fragment {
     private DatePickerDialog mDateSetListener;
     TextView datepick_addticket;
+    ImageView addticktohome;
     final Calendar myCalendar= Calendar.getInstance();
 
     ImageView imageView1;
@@ -86,6 +87,15 @@ public class AddTicketFragment extends Fragment {
         imageView = view.findViewById(R.id.image);
         imageView1 = view.findViewById(R.id.imageView1);
         datepick_addticket = view.findViewById(R.id.datepick_addticket);
+        previous = view.findViewById(R.id.previous);
+        addticktohome = view.findViewById(R.id.addticktohome);
+        addticktohome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),Home_Screen.class);
+                startActivity(intent);
+            }
+        });
 
         mArrayUri = new ArrayList<Uri>();
 
@@ -153,16 +163,16 @@ public class AddTicketFragment extends Fragment {
             }
         });
 
-      /*previous.setOnClickListener(new View.OnClickListener() {
+     previous.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View v) {
-                if (position > 0) {
-                    //decrease the position by 1
-                    position++;
+                if (position >0) {
+                    position--;
                    imageView.setImageURI(mArrayUri.get(position));
                 }
+
             }
-        });*/
+        });
 
 
         imageView = view.findViewById(R.id.image);

@@ -12,6 +12,7 @@ import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper  {
+    public static final String DBNAME = "Usersjaaaa.db";
     public DBHelper (Context context) {
         super(context ,"Usersjaaaa.db",null,8);
     }
@@ -44,18 +45,18 @@ public class DBHelper extends SQLiteOpenHelper  {
             return true;
         }
     }
-    public Boolean checkusername(String username) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from Usersjaaaa where username = ?", new String[]{username});
+    public Boolean checkusername(String name) {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from Usersjaaaa where name = ?", new String[]{name});
         if (cursor.getCount() > 0)
             return true;
         else
             return false;
     }
 
-    public Boolean checkusernamepassword(String username, String password){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from Usersjaaaa where username = ? and password = ?", new String[] {username,password});
+    public Boolean checkusernamepassword(String name, String contact){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from Usersjaaaa where name = ? and contact = ?", new String[] {name,contact});
         if(cursor.getCount()>0)
             return true;
         else

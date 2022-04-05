@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class ProfileFragment extends Fragment {
     EditText nameprofile,password,companyprofile,addressprofile,emailprofile,mobileprofile;
     AlertDialog.Builder builder;
     Button logout;
+    ImageView prototic;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -55,15 +57,23 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-           /* String strtext = getArguments().getString("name");*////stack overflow method
+           /* String strtext = getArguments().getString("name");///stack overflow method*/
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
 
     /*  Bundle bundle = getArguments();
         String message = bundle.getString("message");
         nameprofile.setText(message);
 */
-
+        prototic = view.findViewById(R.id.prototic);
+        prototic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),AddTicketFragment.class);
+                startActivity(intent);
+            }
+        });
         nameprofile = view.findViewById(R.id.nameprofile);
         password = view.findViewById(R.id.password);
         companyprofile = view.findViewById(R.id.companyprofile);
@@ -116,7 +126,7 @@ public class ProfileFragment extends Fragment {
         ////////////////////////////////////////////////////
         Intent intent =getIntent();
         String profilename = getIntent().getStringExtra("keyname");    // pass value new not used
-       /* String pass = getIntent().getStringExtra("keyname");
+        String pass = getIntent().getStringExtra("keyname");
         String company = getIntent().getStringExtra("keyname");
         String address = getIntent().getStringExtra("keyname");
         String email = getIntent().getStringExtra("keyname");

@@ -3,6 +3,7 @@ package com.example.ticketing_app_facetoface;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -23,9 +24,7 @@ public class Login_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-        /*logintext = findViewById(R.id.logintext);
-        logintext.setPaintFlags(logintext.getPaintFlags() | Paint.ANTI_ALIAS_FLAG);
-        logintext.setText("Username");*/
+
         submit = findViewById(R.id.button);
         register = findViewById(R.id.register);
         editbui = (EditText) findViewById(R.id.editbui);
