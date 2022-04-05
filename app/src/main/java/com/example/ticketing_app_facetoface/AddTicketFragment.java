@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,12 +16,15 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,12 +42,15 @@ import java.util.Locale;
 
 public class AddTicketFragment extends Fragment {
     private DatePickerDialog mDateSetListener;
+
+    EditText description, ticketnumberchange;
     TextView datepick_addticket;
     ImageView addticktohome;
-    final Calendar myCalendar= Calendar.getInstance();
-
+    final Calendar myCalendar = Calendar.getInstance();
+    MyAddDBHelper MyDB;
     ImageView imageView1;
-    Button select, previous, next,save,cancel;
+    TextView next, previous;
+    Button select, save, viewadd;
     ImageSwitcher imageView;
 
     int PICK_IMAGE_MULTIPLE = 1;
@@ -52,6 +59,7 @@ public class AddTicketFragment extends Fragment {
     ArrayList<Uri> mArrayUri;
     int position = 0;
     List<String> imagesEncodedList;
+    boolean isAllFieldsChecked = false;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -84,6 +92,11 @@ public class AddTicketFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_ticket, container, false);
 
+        description = view.findViewById(R.id.description);
+        ticketnumberchange = view.findViewById(R.id.ticketnumberchange);
+        viewadd = view.findViewById(R.id.viewadd);
+        MyDB = new MyAddDBHelper(getContext());
+
         imageView = view.findViewById(R.id.image);
         imageView1 = view.findViewById(R.id.imageView1);
         datepick_addticket = view.findViewById(R.id.datepick_addticket);
@@ -92,7 +105,7 @@ public class AddTicketFragment extends Fragment {
         addticktohome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),Home_Screen.class);
+                Intent intent = new Intent(getActivity(), Home_Screen.class);
                 startActivity(intent);
             }
         });
@@ -100,8 +113,6 @@ public class AddTicketFragment extends Fragment {
         mArrayUri = new ArrayList<Uri>();
 
         save = view.findViewById(R.id.save);
-
-
 
         datepick_addticket.setOnClickListener(new View.OnClickListener() {
 
@@ -111,7 +122,7 @@ public class AddTicketFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String _year = String.valueOf(year);
-                        String _month = (month+1) < 10 ? "0" + (month+1) : String.valueOf(month+1);
+                        String _month = (month + 1) < 10 ? "0" + (month + 1) : String.valueOf(month + 1);
                         String _date = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
                         String _pickedDate = year + "-" + _month + "-" + _date;
                         Log.e("PickedDate: ", "Date: " + _pickedDate); //2019-02-12
@@ -126,17 +137,70 @@ public class AddTicketFragment extends Fragment {
         });
 
 
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Ticket Saved", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(),Home_Screen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                String user = ticketnumberchange.getText().toString();
+                String pass = description.getText().toString();
+
+                if(user.equals("")||pass.equals(""))
+                    Toast.makeText(getActivity(),"" , Toast.LENGTH_SHORT).show();
+                else {
+                    if (pass.equals("")) {
+                        Boolean checkuser = MyDB.checkusername(user);
+                        if (checkuser == false) {
+                            Boolean insert = MyDB.insertuserdata(user,pass);
+                            if (insert == true) {
+                            Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity(), Home_Screen.class);
+                            startActivity(intent);
+                            } else{
+                                Toast.makeText(getActivity(), "Registration failed", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "User already exists! please sign in", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Register successfully", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                isAllFieldsChecked = CheckAllFields();/////////pass value android studio method
+                if (isAllFieldsChecked) {
+                    Intent i = new Intent(getActivity(), Home_Screen.class);
+                    startActivity(i);
 
             }
+                String nameTXT = ticketnumberchange.getText().toString();
+                String contactTXT = description.getText().toString();
+                Boolean checkinsertdata = MyDB.insertuserdata(nameTXT, contactTXT);
+                if (checkinsertdata == true)
+                    Toast.makeText(getActivity(), "Enter all details", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getActivity(), "New Enter Not Inserted", Toast.LENGTH_SHORT).show();
+            }
         });
+         viewadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor res = MyDB.getdata();
+                if (res.getCount() == 0) {
+                    Toast.makeText(getActivity(), "No Entry Existed", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                StringBuffer buffer = new StringBuffer();
+                while (res.moveToNext()) {
+                    buffer.append("Name :" + res.getString(0) + "\n");
+                    buffer.append("discription :" + res.getString(1) + "\n");
+
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setCancelable(true);
+                builder.setTitle("User Entries");
+                builder.setMessage(buffer.toString());
+                builder.show();
+            }
+        });
+
 
 
         imageView.setFactory(new ViewSwitcher.ViewFactory() {
@@ -163,18 +227,18 @@ public class AddTicketFragment extends Fragment {
             }
         });
 
-     previous.setOnClickListener(new View.OnClickListener() {
-        @Override
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                if (position >0) {
+                if (position > 0) {
                     position--;
-                   imageView.setImageURI(mArrayUri.get(position));
+                    imageView.setImageURI(mArrayUri.get(position));
+                } else {
+                    Toast.makeText(getContext(), "Previous Image Already Shown", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-
-
         imageView = view.findViewById(R.id.image);
 
         // click here to select image
@@ -188,8 +252,8 @@ public class AddTicketFragment extends Fragment {
                 // setting type to select to be image
                 intent.setType("image/*");
 
-                        // allowing multiple image to be selected
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                // allowing multiple image to be selected
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
 
@@ -197,17 +261,27 @@ public class AddTicketFragment extends Fragment {
         });
 
 
-      /*  intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
-*/
-
-
-
         return view;
     }
-    public void  UIScreen(View view )
-    {
+
+
+    private boolean CheckAllFields() {
+        if (ticketnumberchange.length() == 0) {
+            ticketnumberchange.setError("Username field is required");
+            return false;
+        }
+        if (description.length() == 0) {
+            description.setError("Password is required");
+            return false;
+        } else if (description.length() < 8) {
+            description.setError("Password must be minimum 8 characters");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void UIScreen(View view) {
         datepick_addticket = view.findViewById(R.id.datepick_addticket);
 
 
@@ -221,29 +295,24 @@ public class AddTicketFragment extends Fragment {
     }
 
 
-    private boolean validate_date(){
+    private boolean validate_date() {
         String name = datepick_addticket.getText().toString();
-        if (datepick_addticket.getText().toString().trim().isEmpty() || datepick_addticket.length() < 3 ) {
+        if (datepick_addticket.getText().toString().trim().isEmpty() || datepick_addticket.length() < 3) {
             datepick_addticket.setError("Please enter valid date");
             datepick_addticket.requestFocus();
 
             return false;
-        }
-        else
-        {
+        } else {
         }
         return true;
     }
 
 
-    private void updateLabel(){
-        String myFormat="MM/dd/yy";
-        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
         datepick_addticket.setText(dateFormat.format(myCalendar.getTime()));
     }
-
-
-
 
 
     public String parseDateToddMMyyyy(String time) {
@@ -291,55 +360,15 @@ public class AddTicketFragment extends Fragment {
         }
 
 
-
-
     }
 
-    /*public void popTimePicker(View view) {
 
-
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                hours = selectedHour;
-                minute = selectedMinute;
-                timepicker.setText(String.format(Locale.getDefault(),"%02d:%02d",hours,minute));
-
-            }
-        };
-
-        int style = AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
-        int Color = AlertDialog.BUTTON_POSITIVE;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),style,onTimeSetListener,hours,minute,true);
-        timePickerDialog.setTitle("Select time");
-        timePickerDialog.show();
-    }
-
-*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
-    }
-  /*  public void popTimePicker(View view) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                hours = selectedHour;
-                minute = selectedMinute;
-                timepicker.setText(String.format(Locale.getDefault(),"%02d:%02d",hours,minute));
-
-            }
-        };
-
-        int style = AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
-        int Color = AlertDialog.BUTTON_POSITIVE;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),style,onTimeSetListener,hours,minute,true);
-        timePickerDialog.setTitle("Select time");
-        timePickerDialog.show();
-    }*/
-
-      }
+}

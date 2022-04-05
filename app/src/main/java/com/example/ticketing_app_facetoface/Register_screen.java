@@ -23,7 +23,7 @@ import android.widget.Toast;
 public class Register_screen extends AppCompatActivity {
 
     EditText name, contact, dob, address, gmail, mobile;
-    //Spinner spinner;
+    Spinner spinner;
     Button insert, view;
     DBHelper DB;
     TextView login;
@@ -51,7 +51,8 @@ public class Register_screen extends AppCompatActivity {
         gmail = findViewById(R.id.gmail);
         mobile = findViewById(R.id.mobile);
         insert = findViewById(R.id.btInsert);
-        view = findViewById(R.id.btView);
+       /* view = findViewById(R.id.btView);*/
+        spinner = findViewById(R.id.spinner);
         regtologin =findViewById(R.id.regtologin);
         login = findViewById(R.id.regbutton2);
         DB = new DBHelper(this);
@@ -84,6 +85,7 @@ public class Register_screen extends AppCompatActivity {
                 String gmail1 = gmail.getText().toString();
                 String mobile1 = mobile.getText().toString();
 
+
                 if(user.equals("")||pass.equals(""))
                     Toast.makeText(Register_screen.this, "", Toast.LENGTH_SHORT).show();
                 else {
@@ -102,15 +104,10 @@ public class Register_screen extends AppCompatActivity {
                             Toast.makeText(Register_screen.this, "User already exists! please sign in", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(Register_screen.this, "Passwords not matching", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register_screen.this, "Register successfully", Toast.LENGTH_SHORT).show();
                     }
                 }
-////////////////////////////////////////////////////////////
-               /*Bundle b = new Bundle();
-                b.putString("message", name.getText().toString());
-                myFragment.setArguments(b);
-                fragmentTransaction.add(R.id.frameLayout, myFragment).commit();*/
-////////////////////////////////////////////////////////////////////
+
                 isAllFieldsChecked = CheckAllFields();/////////pass value android studio method
                 if (isAllFieldsChecked) {
                     Intent i = new Intent(Register_screen.this, Home_Screen.class);
@@ -123,20 +120,14 @@ public class Register_screen extends AppCompatActivity {
                 String addressTXT = address.getText().toString();
                 String gmailTXT = gmail.getText().toString();
                 String mobileTXT = mobile.getText().toString();
-
                 Boolean checkinsertdata = DB.insertuserdata(nameTXT, contactTXT, dobTXT, addressTXT, gmailTXT, mobileTXT);
                 if (checkinsertdata == true)
-
                     Toast.makeText(Register_screen.this, "Enter all details", Toast.LENGTH_SHORT).show();
-
                 else
                     Toast.makeText(Register_screen.this, "New Enter Not Inserted", Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(Register_screen.this, Home_Screen.class);
-                startActivity(intent);
-                finish();*/
             }
         });
-        view.setOnClickListener(new View.OnClickListener() {
+       /* view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Cursor res = DB.getdata();
@@ -159,17 +150,10 @@ public class Register_screen extends AppCompatActivity {
                 builder.setMessage(buffer.toString());
                 builder.show();
             }
-        });
+        });*/
     }
 
-    boolean isname(EditText text) {
-        CharSequence email = text.getText().toString();
-        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-    }
-    boolean isEmpty(EditText text) {
-        CharSequence str = text.getText().toString();
-        return TextUtils.isEmpty(str);
-    }
+
 //////pass value method used here///////////
         private boolean CheckAllFields() {
             if (name.length() == 0) {
@@ -204,9 +188,6 @@ public class Register_screen extends AppCompatActivity {
                 return false;
             }
 
-
-
-            // after all validation return true.
             return true;
         }
     }
