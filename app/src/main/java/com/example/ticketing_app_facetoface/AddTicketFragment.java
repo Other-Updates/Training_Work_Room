@@ -27,6 +27,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class AddTicketFragment extends Fragment {
     EditText description, ticketnumberchange;
     TextView datepick_addticket;
     ImageView addticktohome;
+    Spinner status,project;
     final Calendar myCalendar = Calendar.getInstance();
     MyAddDBHelper MyDB;
     ImageView imageView1;
@@ -87,10 +89,11 @@ public class AddTicketFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_ticket, container, false);
+        status = view.findViewById(R.id.spinner);
+        project = view.findViewById(R.id.spinner1);
 
         description = view.findViewById(R.id.description);
         ticketnumberchange = view.findViewById(R.id.ticketnumberchange);
@@ -142,19 +145,24 @@ public class AddTicketFragment extends Fragment {
             public void onClick(View view) {
                 String user = ticketnumberchange.getText().toString();
                 String pass = description.getText().toString();
+                String text2 = status.getSelectedItem().toString();
+                String text3 = project.getSelectedItem().toString();
+                String date = datepick_addticket.getText().toString();
 
-                if(user.equals("")||pass.equals(""))
-                    Toast.makeText(getActivity(),"" , Toast.LENGTH_SHORT).show();
+
+
+                if (user.equals("") || pass.equals(""))
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
                 else {
                     if (pass.equals("")) {
                         Boolean checkuser = MyDB.checkusername(user);
                         if (checkuser == false) {
-                            Boolean insert = MyDB.insertuserdata(user,pass);
+                            Boolean insert = MyDB.insertuserdata(user, pass, text2,text3,date);
                             if (insert == true) {
-                            Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getActivity(), Home_Screen.class);
-                            startActivity(intent);
-                            } else{
+                                Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), Home_Screen.class);
+                                startActivity(intent);
+                            } else {
                                 Toast.makeText(getActivity(), "Registration failed", Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -169,17 +177,23 @@ public class AddTicketFragment extends Fragment {
                     Intent i = new Intent(getActivity(), Home_Screen.class);
                     startActivity(i);
 
-            }
+                }
+
                 String nameTXT = ticketnumberchange.getText().toString();
                 String contactTXT = description.getText().toString();
-                Boolean checkinsertdata = MyDB.insertuserdata(nameTXT, contactTXT);
+                String status1 = status.getSelectedItem().toString();
+                String project1 = project.getSelectedItem().toString();
+                String date1 = datepick_addticket.getText().toString();
+
+
+                Boolean checkinsertdata = MyDB.insertuserdata(nameTXT, contactTXT, status1,project1,date1);
                 if (checkinsertdata == true)
                     Toast.makeText(getActivity(), "Enter all details", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(getActivity(), "New Enter Not Inserted", Toast.LENGTH_SHORT).show();
             }
         });
-         viewadd.setOnClickListener(new View.OnClickListener() {
+        viewadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Cursor res = MyDB.getdata();
@@ -190,7 +204,11 @@ public class AddTicketFragment extends Fragment {
                 StringBuffer buffer = new StringBuffer();
                 while (res.moveToNext()) {
                     buffer.append("Name :" + res.getString(0) + "\n");
-                    buffer.append("discription :" + res.getString(1) + "\n");
+                    buffer.append("Discription :" + res.getString(1) + "\n");
+                    buffer.append("Status :" + res.getString(2) + "\n");
+                    buffer.append("Project :" + res.getString(3) + "\n");
+                    buffer.append("Date :" + res.getString(4) + "\n\n");
+
 
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -200,7 +218,6 @@ public class AddTicketFragment extends Fragment {
                 builder.show();
             }
         });
-
 
 
         imageView.setFactory(new ViewSwitcher.ViewFactory() {

@@ -282,7 +282,7 @@
                 android:text="Submit"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-<!--
+
            <Button
                 android:id="@+id/btView"
                 android:layout_width="match_parent"
@@ -298,7 +298,7 @@
                 android:text="VIEW"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                />-->
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

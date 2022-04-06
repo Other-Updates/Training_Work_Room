@@ -36,8 +36,6 @@ public class Register_screen extends AppCompatActivity {
         setContentView(R.layout.activity_register_screen);
 
 
-
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
       /* FragmentManager fragmentManager = getSupportFragmentManager();              //// first model ///pass new method111111111111
@@ -51,7 +49,7 @@ public class Register_screen extends AppCompatActivity {
         gmail = findViewById(R.id.gmail);
         mobile = findViewById(R.id.mobile);
         insert = findViewById(R.id.btInsert);
-       /* view = findViewById(R.id.btView);*/
+        view = findViewById(R.id.btView);
         spinner = findViewById(R.id.spinner);
         regtologin =findViewById(R.id.regtologin);
         login = findViewById(R.id.regbutton2);
@@ -63,6 +61,7 @@ public class Register_screen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +76,7 @@ public class Register_screen extends AppCompatActivity {
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String text = spinner.getSelectedItem().toString();
                 String user = name.getText().toString();
                 String pass = contact.getText().toString();
                 String company = dob.getText().toString();
@@ -92,7 +91,7 @@ public class Register_screen extends AppCompatActivity {
                     if (pass.equals("")) {
                         Boolean checkuser = DB.checkusername(user);
                         if (checkuser == false) {
-                            Boolean insert = DB.insertuserdata(user,pass,company,address1,gmail1,mobile1);
+                            Boolean insert = DB.insertuserdata(user,pass,company,address1,gmail1,mobile1,text);
                             if (insert == true) {
                                 Toast.makeText(Register_screen.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), Home_Screen.class);
@@ -113,21 +112,21 @@ public class Register_screen extends AppCompatActivity {
                     Intent i = new Intent(Register_screen.this, Home_Screen.class);
                     startActivity(i);
                 }/////////pass value method
-
+                String text1 = spinner.getSelectedItem().toString();
                 String nameTXT = name.getText().toString();
                 String contactTXT = contact.getText().toString();
                 String dobTXT = dob.getText().toString();
                 String addressTXT = address.getText().toString();
                 String gmailTXT = gmail.getText().toString();
                 String mobileTXT = mobile.getText().toString();
-                Boolean checkinsertdata = DB.insertuserdata(nameTXT, contactTXT, dobTXT, addressTXT, gmailTXT, mobileTXT);
+                Boolean checkinsertdata = DB.insertuserdata(nameTXT, contactTXT, dobTXT, addressTXT, gmailTXT, mobileTXT,text1);
                 if (checkinsertdata == true)
                     Toast.makeText(Register_screen.this, "Enter all details", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(Register_screen.this, "New Enter Not Inserted", Toast.LENGTH_SHORT).show();
             }
         });
-       /* view.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Cursor res = DB.getdata();
@@ -142,7 +141,8 @@ public class Register_screen extends AppCompatActivity {
                     buffer.append("Company :" + res.getString(2) + "\n");
                     buffer.append("Address :" + res.getString(3) + "\n");
                     buffer.append("Gmail :" + res.getString(4) + "\n");
-                    buffer.append("Mobile :" + res.getString(5) + "\n\n");
+                    buffer.append("Mobile :" + res.getString(5) + "\n");
+                    buffer.append("project :" + res.getString(6) + "\n\n");
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(Register_screen.this);
                 builder.setCancelable(true);
@@ -150,7 +150,7 @@ public class Register_screen extends AppCompatActivity {
                 builder.setMessage(buffer.toString());
                 builder.show();
             }
-        });*/
+        });
     }
 
 

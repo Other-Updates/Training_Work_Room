@@ -12,22 +12,22 @@ import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper  {
-    public static final String DBNAME = "Usersjaaaa.db";
+    public static final String DBNAME = "Usersjaaaaa.db";
     public DBHelper (Context context) {
-        super(context ,"Usersjaaaa.db",null,8);
+        super(context ,"Usersjaaaaa.db",null,8);
     }
-// ,gmail TEXT ,mobile TEXT
+
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("Create Table Usersjaaaa(name TEXT ,contact TEXT ,dob TEXT,address TEXT,gmail TEXT,mobile TEXT)");
+        DB.execSQL("Create Table Usersjaaaaa(name TEXT ,contact TEXT ,dob TEXT,address TEXT,gmail TEXT,mobile TEXT,spinner TXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        DB.execSQL("drop Table if exists Usersjaaaa");
+        DB.execSQL("drop Table if exists Usersjaaaaa");
     }
 
-    public Boolean insertuserdata (String name, String contact, String dob,String address,String gmail,String mobile) {
+    public Boolean insertuserdata (String name, String contact, String dob,String address,String gmail,String mobile, String spinner) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -36,8 +36,9 @@ public class DBHelper extends SQLiteOpenHelper  {
         contentValues.put("address", address);
         contentValues.put("gmail", gmail);
         contentValues.put("mobile", mobile);
+        contentValues.put("spinner", spinner);
 
-        long result = DB.insert("Usersjaaaa", null, contentValues);
+        long result = DB.insert("Usersjaaaaa", null, contentValues);
 
         if (result == -1)
             return false;
@@ -47,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper  {
     }
     public Boolean checkusername(String name) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Usersjaaaa where name = ?", new String[]{name});
+        Cursor cursor = DB.rawQuery("Select * from Usersjaaaaa where name = ?", new String[]{name});
         if (cursor.getCount() > 0)
             return true;
         else
@@ -56,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper  {
 
     public Boolean checkusernamepassword(String name, String contact){
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Usersjaaaa where name = ? and contact = ?", new String[] {name,contact});
+        Cursor cursor = DB.rawQuery("Select * from Usersjaaaaa where name = ? and contact = ?", new String[] {name,contact});
         if(cursor.getCount()>0)
             return true;
         else
@@ -66,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper  {
     public Cursor getdata () {
 
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from usersjaaaa" , null);
+        Cursor cursor = DB.rawQuery("Select * from usersjaaaaa" , null);
         return cursor;
     }
 

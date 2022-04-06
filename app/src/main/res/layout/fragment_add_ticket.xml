@@ -115,6 +115,7 @@
             >
 
             <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
@@ -145,6 +146,7 @@
             >
 
             <Spinner
+                android:id="@+id/spinner1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
@@ -208,8 +210,9 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="2dp"
                         android:gravity="center"
-                        android:textColor="@drawable/date_editer"
+                        android:inputType="date"
                         android:text="Select Date"
+                        android:textColor="@drawable/date_editer"
                         android:textSize="10dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
